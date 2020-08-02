@@ -49,7 +49,7 @@ class BoganDB():
     def add_points(self, user_id: int, points: int):
         self.cursor.execute(f"SELECT user_id FROM users WHERE user_id = {user_id}")
         result = self.cursor.fetchone()
-        print(result)
+        #print(result)
         if result is not None:
             self.cursor.execute(f"SELECT bogan_points FROM users WHERE user_id = {result[0]}")
             old_points = self.cursor.fetchone()
@@ -61,6 +61,12 @@ class BoganDB():
         else:
             return False
 
+    def remove_points(self, user_id: int, points: int):
+        return self.add_points(user_id, -1*points)
+
     def on_close(self):
         self.cursor.close()
         self.db.close()
+
+# main instance variable for the database
+db = BoganDB('main.sqlite')
