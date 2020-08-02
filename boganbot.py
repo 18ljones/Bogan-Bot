@@ -8,12 +8,14 @@ import sys
 import traceback
 
 client = commands.Bot(command_prefix = '!')
+client.remove_command('help')
 #db = BoganDB('main.sqlite')
 
 #load cogs
 client.load_extension('cogs.boganpoints')
 client.load_extension('cogs.welcome')
 client.load_extension('cogs.minigames')
+client.load_extension('cogs.help')
 
 # grabs the token for the bot from "token.txt" (this txt file is not included in the GitHub repo)
 def get_token():
