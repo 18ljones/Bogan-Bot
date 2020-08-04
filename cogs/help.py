@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from config.config import config
 import asyncio
 
 class Help(commands.Cog):
@@ -12,7 +13,7 @@ class Help(commands.Cog):
         if section.lower() == "minigame" or section.lower() == "minigames": 
             await ctx.author.send(embed=self.create_minigame_embed())
         elif section.lower() == "points" or section.lower() == "bogan_points":
-            await ctx.author.send(embed=self.create_boganpoint_embed())
+            await ctx.author.send(embed=self.create_boganpoint_embed(ctx.author))
         elif section.lower() == "help":
             await ctx.author.send(embed=self.create_help_embed())
         else:
@@ -37,7 +38,7 @@ class Help(commands.Cog):
 
         return embed
 
-    def create_boganpoint_embed(self):
+    def create_boganpoint_embed(self, user : discord.Member):
         embed = discord.Embed(
             description = "A list of all Bogan Point related commands with information about how to use them",
             color = discord.Color.gold()
@@ -47,12 +48,14 @@ class Help(commands.Cog):
         embed.add_field(name="!points",
                         value="Displays your Bogan Point balance.",
                         inline=False)
-        embed.add_field(name="!add_points <person recieving points : User, amount of points : integer>",
-                        value="Gives the specified user the specified amount of points",
-                        inline=False)
-        embed.add_field(name="!remove_points <person losing points : User, amount of points : integer>",
-                        value="Takes the specified amount of points from the specified user.",
-                        inline=False)
+        
+        if config.config_dict["commander"] in str(user.roles):
+            embed.add_field(name="!add_points <person recieving points : User, amount of points : integer>",
+                            value="Gives the specified user the specified amount of points",
+                            inline=False)
+            embed.add_field(name="!remove_points <person losing points : User, amount of points : integer>",
+                            value="Takes the specified amount of points from the specified user.",
+                            inline=False)
 
         return embed
 

@@ -1,5 +1,6 @@
 import discord
 from database.bogan_db import db
+from config.config import config
 from discord.ext import commands
 import asyncio
 
@@ -16,6 +17,7 @@ class BoganPoint(commands.Cog):
 
 
     @commands.command(aliases=['give_points'])
+    @commands.has_role(config.config_dict["commander"])
     async def add_points(self, ctx, member: discord.Member, points: int):
         added_points = db.add_points(member.id, points)
 
@@ -25,6 +27,7 @@ class BoganPoint(commands.Cog):
             await ctx.send('The user {} does not exist'.format(member))
 
     @commands.command(aliases=['take_points'])
+    @commands.has_role(config.config_dict["commander"])
     async def remove_points(self, ctx, member: discord.Member, points: int):
         removed_points = db.remove_points(member.id, points)
 
