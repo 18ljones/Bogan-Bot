@@ -1,0 +1,10 @@
+When editing the config.txt file DO NOT EDIT ANYTHING TO THE RIGHT OF THE COLONS.
+
+Setting Bot Commander Role: Put the name of the role you want to be the Bot 
+Commander role to the right of the colon next to "commander". It is case sensitive.
+    * EXAMPLE: commander:Bot Commander
+
+Configuring Shop: in shop.txt, on each line put the name of the rank and the cost of
+that rank in the format of "name of rank:cost". The rank name is case sensitive.
+    *EXAMPLE: Bogan1:100
+              Bogan2:200

@@ -16,6 +16,8 @@ class Help(commands.Cog):
             await ctx.author.send(embed=self.create_boganpoint_embed(ctx.author))
         elif section.lower() == "help":
             await ctx.author.send(embed=self.create_help_embed())
+        elif section.lower() == "shop" or section.lower() == "shops":
+            await ctx.author.send(embed=self.create_shop_embed())
         else:
             await ctx.send(f"Could not find help for {section}.")
 
@@ -59,6 +61,22 @@ class Help(commands.Cog):
 
         return embed
 
+    def create_shop_embed(self):
+        embed = discord.Embed(
+            description = "A list of shop commands.",
+            color = discord.Color.gold()
+        )
+
+        embed.set_author(name = "Shop Commands")
+        embed.add_field(name="!shop",
+                        value="Lists the ranks and their costs that are available in the shop.",
+                        inline=False)
+        embed.add_field(name="!buy <the role you want to buy : string>",
+                        value="Gives the specified role to the player if they have enough Bogan Points.",
+                        inline=False)
+
+        return embed
+
     def create_help_embed(self):
         embed = discord.Embed(
             description = "A list of sections you can get help on.",
@@ -74,6 +92,9 @@ class Help(commands.Cog):
                         inline=False)
         embed.add_field(name="!help points or !help bogan_points",
                         value="Displays the Bogan Points help message.",
+                        inline=False)
+        embed.add_field(name="!help shop or !help shops",
+                        value="Displays the Shop help message.",
                         inline=False)
 
         return embed

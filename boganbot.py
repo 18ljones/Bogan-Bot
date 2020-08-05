@@ -16,6 +16,7 @@ client.load_extension('cogs.boganpoints')
 client.load_extension('cogs.welcome')
 client.load_extension('cogs.minigames')
 client.load_extension('cogs.help')
+client.load_extension('cogs.shop')
 
 # grabs the token for the bot from "token.txt" (this txt file is not included in the GitHub repo)
 def get_token():
