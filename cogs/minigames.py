@@ -12,7 +12,9 @@ class Minigames(commands.Cog):
     @commands.command(name="dice")
     async def dice(self, ctx, bet : int):
         curpts = int(db.get_points(ctx.author.id))
-        if curpts >= bet :
+        if bet <= 0:
+            await ctx.send("Your bet must be greater than 0.")
+        elif curpts >= bet :
             roll = random.randint(1,100)
             if roll > 55:
                 winpts = int(bet * 1.1)
@@ -27,7 +29,9 @@ class Minigames(commands.Cog):
     @commands.command(name="50/50")
     async def fifty_fifty(self, ctx, bet : int):
         curpts = int(db.get_points(ctx.author.id))
-        if curpts >= bet :
+        if bet <= 0:
+            await ctx.send("Your bet must be greater than 0.")
+        elif curpts >= bet :
             roll = random.randint(1,2)
             if roll == 2:
                 db.add_points(ctx.author.id, bet)
@@ -41,7 +45,9 @@ class Minigames(commands.Cog):
     @commands.command(name="number_pick")
     async def pick_a_number(self, ctx, range : int, number_picked : int, bet : int):
         curpts = int(db.get_points(ctx.author.id))
-        if curpts >= bet :
+        if bet <= 0:
+            await ctx.send("Your bet must be greater than 0.")
+        elif curpts >= bet :
             roll = random.randint(1,range)
             if roll == number_picked:
                 winpts = int(bet * (range * .75))
